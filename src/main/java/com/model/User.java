@@ -4,10 +4,10 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "User")
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; // Default serial version UID
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

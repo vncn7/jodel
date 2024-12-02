@@ -8,7 +8,8 @@ public class Voting {
 
 	@Id
 	@SequenceGenerator(name = "votingSeq", sequenceName = "ZSEQ_VOTING_ID", allocationSize = 1, initialValue = 10)
-	@GeneratedValue(generator = "votingSeq")
+	//@GeneratedValue(generator = "votingSeq")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	@Column(name = "id")
 	private Long id;

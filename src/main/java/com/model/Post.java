@@ -9,8 +9,9 @@ public class Post {
 
     @Id
     @SequenceGenerator(name = "postSeq", sequenceName = "ZSEQ_POST_ID", allocationSize = 1, initialValue = 10)
-    @GeneratedValue(generator = "postSeq")
-
+    //@GeneratedValue(generator = "postSeq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     @Column(name = "id")
     private Long id;
 

@@ -10,7 +10,8 @@ public class Comment {
 
     @Id
     @SequenceGenerator(name = "commentSeq", sequenceName = "ZSEQ_COMMENT_ID", allocationSize = 1, initialValue = 10)
-    @GeneratedValue(generator = "commentSeq")
+    //@GeneratedValue(generator = "commentSeq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
     private Long id;
