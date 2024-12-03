@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class CommentService {
 
-    private final CommentRepository commentRepository;
+    private CommentRepository commentRepository;
 
     @Autowired
     public CommentService(CommentRepository commentRepository) {
