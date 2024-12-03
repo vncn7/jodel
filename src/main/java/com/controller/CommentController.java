@@ -11,13 +11,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
-
-    private final CommentService commentService;
-
-    @Autowired
-    public CommentController(CommentService commentService) {
-        this.commentService = commentService;
-    }
+	
+	@Autowired
+    private CommentService commentService;
 
     // Get comments by post ID
     @GetMapping("/getComments")
