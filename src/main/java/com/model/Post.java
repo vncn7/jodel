@@ -2,31 +2,31 @@ package com.model;
 
 import java.util.Date;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Post")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+@Table(name = "Tpost")
 public class Post {
 
     @Id
-    @SequenceGenerator(name = "postSeq", sequenceName = "ZSEQ_POST_ID", allocationSize = 1, initialValue = 10)
-    //@GeneratedValue(generator = "postSeq")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-
     @Column(name = "text")
     private String text;
-
     @Column(name = "longitude")
     private Double longitude;
-
     @Column(name = "latitude")
     private Double latitude;
-
     @Column(name = "createdAt")
     private Date createdAt;
-
     @Column(name = "authorId")
     private Long authorId;
 

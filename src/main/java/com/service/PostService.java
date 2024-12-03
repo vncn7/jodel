@@ -4,24 +4,21 @@ import com.model.Post;
 import com.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class PostService {
 
-    private final PostRepository postRepository;
-
     @Autowired
-    public PostService(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
+    private PostRepository postRepository;
 
     public List<Post> getAllPosts() {
-        return postRepository.findAll();
+        return (List<Post>) postRepository.findAll();
     }
 
-    public List<Post> getPosts(Double lat, Double lon) {
+    public List<Post> getPostsByLocation(Double lat, Double lon) {
         Double lonMin = lon - 0.14;
         Double lonMax = lon + 0.14;
         Double latMin = lat - 0.14;
@@ -30,19 +27,17 @@ public class PostService {
         return postRepository.findByLongitudeBetweenAndLatitudeBetween(lonMin, lonMax, latMin, latMax);
     }
 
-    public Post getPost(Long id) {
+    public Post getPostById(Long id) {
         return postRepository.findById(id).orElse(null);
     }
 
-    public Post savePost(Post post) {
+    public Post createPost(Post post) {
         return postRepository.save(post);
     }
 
-    public void deletePost(Long id) {
-        postRepository.deleteById(id);
+    public String deletePost(Post post) {
+        postRepository.delete(post);
+        return "Post is deleted for postId: " + post.getId();
     }
 
-    public void deleteAllPosts() {
-        postRepository.deleteAll();
-    }
 }

@@ -5,31 +5,35 @@ import com.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
+
+
 
 @Service
+@Transactional
 public class CommentService {
+	
+@Autowired
+private CommentRepository commentRepository;
 
-    private CommentRepository commentRepository;
 
-    @Autowired
-    public CommentService(CommentRepository commentRepository) {
-        this.commentRepository = commentRepository;
-    }
-
-    public List<Comment> getCommentsByPostId(Long postId) {
-        return commentRepository.findByPostId(postId);
-    }
-
-    public Comment addComment(String content, double longitude, double latitude, Long authorId, Long postId) {
-        Comment comment = new Comment(content, longitude, latitude, authorId, postId);
-        return commentRepository.save(comment);
-    }
-
-    public Comment getComment(Long id) {
-        return commentRepository.findById(id).orElse(null);
-    }
-
-    public void removeComment(Long id) {
-        commentRepository.deleteById(id);
-    }
+public List<Comment> getAllComments() {
+	return (List<Comment>) commentRepository.findAll();
 }
+
+public List<Comment> getCommentsByPostId(long postId) {
+    return commentRepository.findByPostId(postId);
+}
+
+public Comment getCommentById(long id) {
+	return commentRepository.findById(id).get();
+}
+
+public Comment createComment(Comment comment) {
+	return commentRepository.save(comment);
+}
+
+public String deleteComment(Comment  comment) {
+	commentRepository.delete(comment);
+	return "Comment is Deleted for commentId:"+comment.getId();
+}}

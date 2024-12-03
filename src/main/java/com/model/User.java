@@ -4,7 +4,7 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "Tuser")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L; // Default serial version UID
