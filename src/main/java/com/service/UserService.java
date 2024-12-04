@@ -8,15 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-
-
-
-import com.model.User;
-import com.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.List;
-
 @Service
 public class UserService {
 
@@ -24,7 +15,11 @@ public class UserService {
     private UserRepository userRepository;
 
     public User login(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password);
+        User user = userRepository.findByUsernameAndPassword(username, password);
+        if (user == null) {
+            throw new RuntimeException("Invalid credentials");
+        }
+        return user;
     }
 
     public List<User> getUsers() {

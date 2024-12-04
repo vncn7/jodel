@@ -17,7 +17,8 @@ import lombok.NoArgsConstructor;
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "commentSeq", sequenceName = "ZSEQ_COMMENT_ID", allocationSize = 1, initialValue = 10)
+    @GeneratedValue(generator = "commentSeq") // Use the sequence generator
     @Column(name = "id")
     private Long id;
     @Column(name = "text")
@@ -87,8 +88,8 @@ public class Comment {
         return createdAt;
     }
 
-    public void setCreatedAt(){
-        this.createdAt = new Date();
+    public void setCreatedAt(Date date){
+        this.createdAt = date;
     }
 
     public Long getAuthorId() {
