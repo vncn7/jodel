@@ -1,63 +1,68 @@
 package com.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Tvoting")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+@Table(name = "Voting")
 public class Voting {
 
-	@Id
-	@SequenceGenerator(name = "votingSeq", sequenceName = "ZSEQ_VOTING_ID", allocationSize = 1, initialValue = 10)
-	//@GeneratedValue(generator = "votingSeq")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
 
-	@Column(name = "id")
-	private Long id;
+    @Column(name = "commentId")
+    private Long commentId;
 
-	@Column(name = "commentId")
-	private Long commentId;
+    @Column(name = "authorId")
+    private Long authorId;
 
+    @Column(name = "value")
+    private int value;
 
-	@Column(name = "authorId")
-	private Long authorId;
+    public Voting(int value) {
+        this.value = value;
+    }
 
-	@Column(name = "value")
-	private int value;
+    public Voting(Long commentId, Long authorId, int value) {
+        this.commentId = commentId;
+        this.authorId = authorId;
+        this.value = value;
+    }
 
-	public Voting() {
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	}
+    public Long getCommentId() {
+        return commentId;
+    }
 
-	public Voting(int value) {
-		this.value = value;
-	}
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getAuthorId() {
+        return authorId;
+    }
 
-	public int getValue() {
-		return value;
-	}
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
 
-	public void setValue(int value) {
-		this.value = value;
-	}
+    public int getValue() {
+        return value;
+    }
 
-	public Long getAuthorId() {
-		return authorId;
-	}
-
-	public void setAuthorId(Long authorId) {
-		this.authorId = authorId;
-	}
-
-	public Long getCommentId() {
-		return commentId;
-	}
-
-	public void setCommentId(Long commentId) {
-		this.commentId = commentId;
-	}
-
+    public void setValue(int value) {
+        this.value = value;
+    }
 }

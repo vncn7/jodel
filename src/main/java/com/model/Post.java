@@ -30,8 +30,6 @@ public class Post {
     @Column(name = "authorId")
     private Long authorId;
 
-    public Post() {
-    }
 
     public Post(String text, double longitude, double latitude, Long userId) {
         this.text =text;

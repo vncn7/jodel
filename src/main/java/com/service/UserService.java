@@ -7,6 +7,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+
+
+
+import com.model.User;
+import com.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -14,25 +24,14 @@ public class UserService {
     private UserRepository userRepository;
 
     public User login(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password)
-                .orElse(new User(0L, "", ""));
+        return userRepository.findByUsernameAndPassword(username, password);
     }
 
-    public List<User> getAllUsers() {
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    public User getUserById(Long userId) {
+    public User getUser(Long userId) {
         return userRepository.findById(userId).orElse(null);
     }
-
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
-
-    public String deleteUser(User user) {
-        userRepository.delete(user);
-        return "User is deleted for userId: " + user.getId();
-    }
-
 }

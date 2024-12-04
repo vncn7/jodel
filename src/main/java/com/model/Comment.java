@@ -37,8 +37,6 @@ public class Comment {
     
     
     
-    public Comment() {
-    }
 
     public Comment(String text, double longitude, double latitude, Long userId, Long postId) {
         this.text =text;
