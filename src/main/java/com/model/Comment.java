@@ -3,14 +3,16 @@ package com.model;
 import java.util.Date;
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "Tcomment")
 public class Comment {
 
+    // Sequence generator to auto increment the ID field
     @Id
     @SequenceGenerator(name = "commentSeq", sequenceName = "ZSEQ_COMMENT_ID", allocationSize = 1, initialValue = 10)
-    @GeneratedValue(generator = "commentSeq") // Use the sequence generator
+    @GeneratedValue(generator = "commentSeq") 
+    
+    // Attributes 
     @Column(name = "id")
     private Long id;
     @Column(name = "text")
@@ -27,12 +29,9 @@ public class Comment {
     public Long postId;
 
     
-    
-    
+    // Constructors
     public Comment() {
-        this.createdAt = new Date();
     }
-
     public Comment(String text, double longitude, double latitude, Long userId, Long postId) {
         this.text =text;
         this.longitude = longitude;
@@ -41,55 +40,41 @@ public class Comment {
         this.postId = postId;
         this.createdAt = new Date();
     }
-
-    public Comment(String text) {
-        this.text = text;
-    }
     
+    // Getters and Setters
     public Long getId() {
         return id;
     }
-
     public void setId (Long id) {
         this.id = id;
     }
-
     public String getText() {
         return text;
     }
-
     public void setText(String text) {
         this.text = text;
     }
-
     public Double getLongitude() {
         return longitude;
     }
-
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-
     public Double getLatitude() {
         return latitude;
     }
-
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
-
     public Date getCreatedAt() {
         return createdAt;
     }
-
     public void setCreatedAt(){
         this.createdAt = new Date();
     }
-
     public Long getAuthorId() {
         return authorId;
     }
-
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
     }
@@ -97,10 +82,7 @@ public class Comment {
     public Long getPostId() {
         return postId;
     }
-
     public void setPostId(Long postId) {
         this.postId = postId;
     }
-
-
 }

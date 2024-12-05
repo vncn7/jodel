@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.model.Post;
-import com.model.User;
 import com.service.PostService;
 import java.util.List;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/posts")
@@ -20,23 +20,25 @@ public class PostController {
     @Autowired
     private PostService postService;
     
-    @GetMapping("/getPosts")
-    public ResponseEntity<List<Post>> getPosts(
-            @RequestParam(value = "lat", required = false) Double lat, 
-            @RequestParam(value = "lon", required = false) Double lon) {
-        if (lat != null && lon != null) {
-            return ResponseEntity.ok(postService.getPosts(lat, lon));
-        }
+    // Returns all posts
+    @GetMapping("/getAllPosts")
+    public ResponseEntity<List<Post>> getPosts() {
         return ResponseEntity.ok(postService.getAllPosts());
     }
+    
+    // Returns all posts for a given location
+    @GetMapping("/getPosts")
+    public ResponseEntity<List<Post>> getPosts(
+            @RequestParam("lat") Double lat, 
+            @RequestParam("lon") Double lon) {
+        return ResponseEntity.ok(postService.getPosts(lat, lon));
+    }
 
-    @PostMapping("/createPost")
-    public ResponseEntity<Post> createPost(
-            @RequestParam("text") String text,
-            @RequestParam("lon") double longitude,
-            @RequestParam("lat") double latitude,
-            @RequestParam("authorId") Long authorId) {
-        Post post = new Post(text, longitude, latitude, authorId);
+    // Add post
+    @PostMapping("/addPost")
+    public ResponseEntity<Post> addPost(@RequestBody Post post) {
+    	// Set the createdAt attribute to the current date
+    	post.setCreatedAt();
         return ResponseEntity.ok(postService.save(post));
     }
 }

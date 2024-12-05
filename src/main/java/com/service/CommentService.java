@@ -12,11 +12,13 @@ public class CommentService {
 
     @Autowired
     private CommentRepository commentRepository;
-
+    
+    // Returns all comments for a given post
     public List<Comment> getComments(Long postId) {
         return commentRepository.findByPostId(postId);
     }
-
+    
+    // Adds a comment to a post
     public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }
