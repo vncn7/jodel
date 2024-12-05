@@ -2,17 +2,9 @@ package com.model;
 
 import java.util.Date;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Builder
 @Table(name = "Tcomment")
 public class Comment {
 
@@ -37,7 +29,9 @@ public class Comment {
     
     
     
-    
+    public Comment() {
+        this.createdAt = new Date();
+    }
 
     public Comment(String text, double longitude, double latitude, Long userId, Long postId) {
         this.text =text;
@@ -51,7 +45,7 @@ public class Comment {
     public Comment(String text) {
         this.text = text;
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -88,8 +82,8 @@ public class Comment {
         return createdAt;
     }
 
-    public void setCreatedAt(Date date){
-        this.createdAt = date;
+    public void setCreatedAt(){
+        this.createdAt = new Date();
     }
 
     public Long getAuthorId() {

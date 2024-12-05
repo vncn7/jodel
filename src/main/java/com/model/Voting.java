@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-@Table(name = "Voting")
+@Table(name = "Tvoting")
 public class Voting {
 
     @Id
