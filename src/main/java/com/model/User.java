@@ -9,8 +9,10 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L; // Default serial version UID
 
+    // Sequence generator to auto increment the ID field
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "userSeq", sequenceName = "ZSEQ_USER_ID", allocationSize = 1, initialValue = 10)
+    @GeneratedValue(generator = "userSeq") 
     private Long id;
 
     @Column(name = "username", length = 64, unique = true, nullable = false)
