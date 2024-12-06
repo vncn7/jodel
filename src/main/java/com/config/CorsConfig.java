@@ -1,3 +1,4 @@
+/*
 package com.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -16,3 +17,4 @@ public class CorsConfig implements WebMvcConfigurer {
             .allowCredentials(true); // Allow credentials like cookies or Authorization headers
     }
 }
+*/
