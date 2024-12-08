@@ -1,12 +1,12 @@
 -- Insert data into User table
 INSERT INTO "tuser" (id, username, password) 
-    VALUES (1, 'test1', 'password')
+    VALUES (1, 'test1', '$2a$10$QKG2zDUMMG7g9316xA.oLuqYEYFRgO9bmHVVWj13rbltv5AFD1nWq')
     ON CONFLICT (id) DO NOTHING;
 INSERT INTO "tuser" (id, username, password)
-    VALUES (2, 'test2', 'password')
+    VALUES (2, 'test2', '$2a$10$YmvI59i8bVjYzrZdZKHFbe4BObKAthip7vBvOcLVNBNYcxwNs1AFC')
     ON CONFLICT (id) DO NOTHING;
 INSERT INTO "tuser" (id, username, password)
-    VALUES (3, 'Vkehl', 'password')
+    VALUES (3, 'Vkehl', '$2a$10$oTxtncc92gC4fnCq9PbHS.y5zUiq/Ab67scGiFIK4JG.O.Dhp7JlG')
     ON CONFLICT (id) DO NOTHING;
 
 -- Insert data into Post table

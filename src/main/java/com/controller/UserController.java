@@ -14,7 +14,7 @@ import com.service.UserService;
 import java.util.List;
 
 
-
+// allow requests from localhost:3000 (reactjs)
 @CrossOrigin(origins = "http://localhost:3000")
 
 @RestController
