@@ -11,13 +11,13 @@ INSERT INTO "tuser" (id, username, password)
 
 -- Insert data into Post table
 INSERT INTO "tpost" (id, latitude, longitude, created_At, text, author_Id)
-    VALUES (1, 24, 25345, '2024-01-08', 'Das ist ein Post', 1)
+    VALUES (1, 48.737195, 9.295724, '2024-01-08', 'Das ist ein Post aus Esslingen am Neckar', 1)
     ON CONFLICT (id) DO NOTHING;
 INSERT INTO "tpost" (id, latitude, longitude, created_At, text, author_Id)
     VALUES (2, 32265, 2324, '2024-01-08', 'Und das ist der zweite Post', 2)
     ON CONFLICT (id) DO NOTHING;
 INSERT INTO "tpost" (id, latitude, longitude, created_At, text, author_Id)
-    VALUES (3, 24, 25345, '2024-01-08', 'Und das ist der dritte Post', 1)
+    VALUES (3, 48.740841, 9.329965, '2024-01-08', 'Und das hier ist ein anderer Post aus Esslingen', 1)
     ON CONFLICT (id) DO NOTHING;
 INSERT INTO "tpost" (id, latitude, longitude, created_At, text, author_Id)
     VALUES (4, 32265, 2324, '2024-01-08', 'Und das ist der letzte Post', 2)

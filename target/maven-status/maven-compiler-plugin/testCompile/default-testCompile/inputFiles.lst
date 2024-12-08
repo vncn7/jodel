@@ -1,6 +1,7 @@
 /home/vncnt/Documents/jodel/src/test/java/com/jodel/CommentControllerTest.java
 /home/vncnt/Documents/jodel/src/test/java/com/jodel/CommentServiceTest.java
 /home/vncnt/Documents/jodel/src/test/java/com/jodel/PostControllerTest.java
+/home/vncnt/Documents/jodel/src/test/java/com/jodel/PostRepositoryTest.java
 /home/vncnt/Documents/jodel/src/test/java/com/jodel/PostServiceTest.java
 /home/vncnt/Documents/jodel/src/test/java/com/jodel/UserControllerTest.java
 /home/vncnt/Documents/jodel/src/test/java/com/jodel/UserServiceTest.java
