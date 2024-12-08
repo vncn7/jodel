@@ -29,6 +29,7 @@ public class PostController {
     // Returns all posts for a given location
     @GetMapping("/getPosts")
     public ResponseEntity<List<Post>> getPosts(
+
             @RequestParam("lat") Double lat, 
             @RequestParam("lon") Double lon) {
         return ResponseEntity.ok(postService.getPosts(lat, lon));

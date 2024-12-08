@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.jodel.UserControllerTest
+Test set: com.jodel.PostControllerTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s -- in com.jodel.UserControllerTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.562 s -- in com.jodel.PostControllerTest
