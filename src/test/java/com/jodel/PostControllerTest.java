@@ -28,6 +28,7 @@ public class PostControllerTest {
 
     private Post post;
 
+    // Setup the post object before each test
     @BeforeEach
     public void setUp() {
         post = new Post();
@@ -37,42 +38,52 @@ public class PostControllerTest {
         post.setLongitude(0.0);
     }
 
+    // Test the getPosts method
     @Test
     public void testGetAllPosts() {
+        // Setup the mock to return a list with one element
         when(postService.getAllPosts()).thenReturn(List.of(post));
 
+        // Call the getPosts method
         ResponseEntity<List<Post>> response = postController.getPosts();
 
-        assertNotNull(response.getBody());
-        assertEquals(1, response.getBody().size());
-        assertEquals(post, response.getBody().get(0));
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        verify(postService).getAllPosts();
+        // Check the response
+        assertEquals(1, response.getBody().size()); // Ensure the list has one element
+        assertEquals(post, response.getBody().get(0)); // Check the first element in the list
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(postService).getAllPosts(); // Ensure the service method was called
     }
 
+    // Test the getPosts method
     @Test
-    public void testGetPostsByLocation() {  // Changed method name
+    public void testGetPosts() {  
         double lat = 0.0;
-        double lon = 0.0;
+        double lon = 0.0; 
+        // Setup the mock to return a list with one element
         when(postService.getPosts(lat, lon)).thenReturn(List.of(post));
 
+        // Call the getPosts method
         ResponseEntity<List<Post>> response = postController.getPosts(lat, lon);
 
-        assertNotNull(response.getBody());
-        assertEquals(1, response.getBody().size());
-        assertEquals(post, response.getBody().get(0));
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        verify(postService).getPosts(lat, lon);
+        // Check the response
+        assertEquals(1, response.getBody().size()); // Ensure the list has one element
+        assertEquals(post, response.getBody().get(0)); // Check the first element in the list
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(postService).getPosts(lat, lon); // Ensure the service method was called
     }
 
+    // Test the addPost method
     @Test
     public void testAddPost() {
+        // Setup the mock to return the post
         when(postService.save(post)).thenReturn(post);
 
+        // Call the addPost method
         ResponseEntity<Post> response = postController.addPost(post);
 
-        assertEquals(post, response.getBody());
-        assertEquals(HttpStatus.OK, response.getStatusCode());  // POST should return CREATED
-        verify(postService).save(post);
+        // Check the response
+        assertEquals(post, response.getBody()); // Ensure the post is returned
+        assertEquals(HttpStatus.OK, response.getStatusCode());  // Ensure the status code is OK
+        verify(postService).save(post); // Ensure the service method was called
     }
 }

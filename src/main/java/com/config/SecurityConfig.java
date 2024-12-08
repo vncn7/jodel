@@ -20,10 +20,10 @@ public class SecurityConfig {
     }
     @Bean
 
-    // This method returns a SecurityFilterChain object that disables CSRF protection and permits all requests
+    // disables CSRF protection and permits all requests to any endpoint without authentication!!!
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
+            .csrf(csrf -> csrf.disable()) 
             .authorizeHttpRequests(authz -> authz
                 .anyRequest().permitAll()
             );

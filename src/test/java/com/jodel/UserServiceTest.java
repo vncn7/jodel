@@ -31,6 +31,7 @@ public class UserServiceTest {
 
     private User user;
 
+    // Setup the user object before each test
     @BeforeEach
     public void setUp() {
         user = new User();
@@ -38,49 +39,64 @@ public class UserServiceTest {
         user.setPassword("test");
     }
 
+    // Test the registerUser method
     @Test
     public void testRegisterUser() {
-        when(passwordEncoder.encode(user.getPassword())).thenReturn("hashedPassword");
+        // Setup the mock to return the user
+        when(passwordEncoder.encode(user.getPassword())).thenReturn("hashedPassword"); // simulate hashing
+        // Update the mock to return the user
         when(userRepository.save(user)).thenReturn(user);
 
+        // Call the registerUser method
         User savedUser = userService.registerUser(user);
 
-        assertEquals(user, savedUser);
-        assertEquals("hashedPassword", savedUser.getPassword());
-
-        verify(passwordEncoder).encode("test");
-        verify(userRepository).save(user);
+        // Check the response
+        assertEquals(user, savedUser); // Ensure the user is returned
+        assertEquals("hashedPassword", savedUser.getPassword()); // Ensure the password is hashed
+        verify(passwordEncoder).encode("test"); // Ensure the password was hashed
+        verify(userRepository).save(user); // Ensure the repository method was called
     }
 
+    // Test the login method
     @Test
     public void testLogin() {
+        // Setup the mock to return the user
         when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+        // Update the mock to return the user
         when(passwordEncoder.matches(user.getPassword(), user.getPassword())).thenReturn(true);
 
+        // Call the login method
         User loggedInUser = userService.login(user.getUsername(), user.getPassword());
 
-        assertEquals(user, loggedInUser);
-
-        verify(userRepository).findByUsername(user.getUsername());
-        verify(passwordEncoder).matches(user.getPassword(), user.getPassword());
+        // Check the response
+        assertEquals(user, loggedInUser); // Ensure the user is returned
+        verify(userRepository).findByUsername(user.getUsername()); // Ensure the repository method was called
+        verify(passwordEncoder).matches(user.getPassword(), user.getPassword()); // Ensure the password was checked
     }
     
+    // Test the getUsers method
     @Test 
     public void testGetUsers() {
+        // Call the getUsers method
         userService.getUsers();
-        verify(userRepository).findAll();
+
+        // Check the response
+        verify(userRepository).findAll(); // Ensure the repository method was called
     }
 
+    // Test the getUser method
     @Test
     public void testGetUser() {
         Long userId = 1L;
 
+        // Setup the mock to return the user
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
 
+        // Call the getUser method
         User foundUser = userService.getUser(userId);
 
-        assertEquals(user, foundUser);
-
-        verify(userRepository).findById(userId);
+        // Check the response
+        assertEquals(user, foundUser); // Ensure the user is returned
+        verify(userRepository).findById(userId); // Ensure the repository method was called
     }
 }

@@ -13,21 +13,22 @@ public class VotingService {
     @Autowired
     private VotingRepository votingRepository;
 
-
+    // get all votings for a comment
     public List<Voting> getVotings(Long commentId) {
         return votingRepository.findByCommentId(commentId);
     }
 
-    // Adjusted to handle value instead of isLike
+    // get likes for a comment
     public List<Voting> getLikes(Long commentId) {
         return votingRepository.findByCommentIdAndValue(commentId, 1); // 1 for like
     }
 
-    // Adjusted to handle value instead of isLike
+    // get dislikes for a comment
     public List<Voting> getDislikes(Long commentId) {
         return votingRepository.findByCommentIdAndValue(commentId, -1); // -1 for dislike
     }
 
+    // Upvote a comment
     public Voting upvote(Voting voting) {
         Optional<Voting> existingVote = votingRepository.findByCommentIdAndAuthorId(voting.getCommentId(), voting.getAuthorId());
         // If the user has already voted on this comment update the vote
@@ -42,6 +43,7 @@ public class VotingService {
         }
     }
 
+    // Downvote a comment
     public Voting downvote(Voting voting) {
         Optional<Voting> existingVote = votingRepository.findByCommentIdAndAuthorId(voting.getCommentId(), voting.getAuthorId());
         // If the user has already voted on this comment update the vote

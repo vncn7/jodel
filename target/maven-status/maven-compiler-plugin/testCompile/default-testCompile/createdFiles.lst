@@ -1,7 +1,9 @@
 com/jodel/VotingServiceTest.class
+com/jodel/PostServiceTest.class
 com/jodel/UserServiceTest.class
 com/jodel/UserControllerTest.class
 com/jodel/PostControllerTest.class
+com/jodel/PostRepositoryTest.class
 com/jodel/CommentServiceTest.class
 com/jodel/CommentControllerTest.class
 com/jodel/VotingControllerTest.class

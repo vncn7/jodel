@@ -31,8 +31,7 @@ public class CommentController {
     // Adds a comment to a post
     @PostMapping("/addComment")
     public ResponseEntity<Comment> addComment(@RequestBody Comment comment) {
-        // Set the createdAt attribute to the current date
-        comment.setCreatedAt();
+        comment.setCreatedAt(); // Set the createdAt attribute to the current date
         return ResponseEntity.ok(commentService.save(comment));
     }
 }

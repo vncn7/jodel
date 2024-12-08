@@ -28,6 +28,7 @@ public class UserControllerTest {
 
     private User user;
 
+    // Setup the user object before each test
     @BeforeEach
     public void setUp() {
         user = new User();
@@ -35,47 +36,63 @@ public class UserControllerTest {
         user.setPassword("test");
     }
 
+    // Test the registerUser method
     @Test
     public void testRegisterUser() {
+        // Setup the mock to return the user
         when(userService.registerUser(user)).thenReturn(user);
 
+        // Call the registerUser method
         User registeredUser = userController.registerUser(user);
 
-        assertEquals(user, registeredUser);
-        verify(userService).registerUser(user);
+        // Check the response
+        assertEquals(user, registeredUser); // Ensure the user is returned
+        verify(userService).registerUser(user); // Ensure the service method was called
     }
 
+    // Test the login method
     @Test
     public void testLogin() {
+        // Setup the mock to return the user
         when(userService.login(user.getUsername(), user.getPassword())).thenReturn(user);
 
+        // Call the login method
         User loggedInUser = userController.login(user);
 
-        assertEquals(user, loggedInUser);
-        verify(userService).login(user.getUsername(), user.getPassword());
+        // Check the response
+        assertEquals(user, loggedInUser); // Ensure the user is returned
+        verify(userService).login(user.getUsername(), user.getPassword()); // Ensure the service method was called
     }
 
+    // Test the getUser method
     @Test
     public void testGetUser() {
         Long userId = 1L;
+        // Setup the mock to return the user
         when(userService.getUser(userId)).thenReturn(user);
     
+        // Call the getUser method
         ResponseEntity<User> response = userController.getUser(userId);
     
-        assertEquals(user, response.getBody());
-        assertEquals(HttpStatus.OK, response.getStatusCode()); 
-        verify(userService).getUser(userId);
+        // Check the response
+        assertEquals(user, response.getBody()); // Ensure the user is returned
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(userService).getUser(userId); // Ensure the service method was called
     }
     
+    // Test the getAllUsers method
     @Test
     public void testGetAllUsers() {
+        // Setup the mock to return a list with one element
         when(userService.getUsers()).thenReturn(List.of(user));
     
+        // Call the getAllUsers method
         ResponseEntity<List<User>> response = userController.getAllUsers();
     
-        assertEquals(1, response.getBody().size());
-        assertEquals(user, response.getBody().get(0));
-        assertEquals(HttpStatus.OK, response.getStatusCode()); 
-        verify(userService).getUsers();
+        // Check the response
+        assertEquals(1, response.getBody().size()); // Ensure the list has one element
+        assertEquals(user, response.getBody().get(0)); // Check the first element in the list
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(userService).getUsers(); // Ensure the service method was called
     }
 }

@@ -22,20 +22,23 @@ public class PostRepositoryTest {
     private Post nearPost;
     private Post farPost;
 
+    // Setup the post objects before each test
     @BeforeEach
     public void setUp() {
-        // Create test posts
+        // Near post (less than 10km away)
         nearPost = new Post();
         nearPost.setLatitude(0.1);
         nearPost.setLongitude(0.1);
         nearPost.setText("Near Post");
 
+        // Far post (more than 10km away)
         farPost = new Post();
-        farPost.setLatitude(10.0);
-        farPost.setLongitude(10.0);
+        farPost.setLatitude(99.0);
+        farPost.setLongitude(99.0);
         farPost.setText("Far Post");
     }
 
+    // Test the findPostsWithin10km method
     @Test
     public void testFindPostsWithin10km() {
         // Search point close to nearPost
@@ -53,16 +56,17 @@ public class PostRepositoryTest {
         verify(postRepository).findPostsWithin10km(searchLon, searchLat);
         
         // Assertions
-        assertNotNull(posts);
-        assertEquals(1, posts.size());
-        assertEquals(nearPost.getText(), posts.get(0).getText());
+        assertEquals(1, posts.size()); // Ensure the list has one element
+        assertEquals(nearPost.getText(), posts.get(0).getText()); // Check the first element in the list
+        verify (postRepository).findPostsWithin10km(searchLon, searchLat); // Ensure the repository method was called
     }
 
+    // Test the findPostsWithin10km method
     @Test
     public void testFindPostsOutsideRadius() {
         // Search point far from both posts
-        double searchLat = 50.0;
-        double searchLon = 50.0;
+        double searchLat = 45.0;
+        double searchLon = 45.0;
 
         // Mock the repository method to return an empty list
         when(postRepository.findPostsWithin10km(searchLon, searchLat))
@@ -71,10 +75,8 @@ public class PostRepositoryTest {
         // Call the method
         List<Post> posts = postRepository.findPostsWithin10km(searchLon, searchLat);
 
-        // Verify interactions
-        verify(postRepository).findPostsWithin10km(searchLon, searchLat);
-
-        // Assertions
-        assertTrue(posts.isEmpty());
+        // assertions
+        assertTrue(posts.isEmpty()); // Ensure the list is empty
+        verify(postRepository).findPostsWithin10km(searchLon, searchLat); // Ensure the repository method was called
     }
 }

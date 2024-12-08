@@ -17,17 +17,19 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 @ExtendWith(MockitoExtension.class)
 public class CommentControllerTest {
 
     @Mock
     private CommentService commentService;
 
-    @InjectMocks
+    @InjectMocks 
     private CommentController commentController;
 
     private Comment comment;
 
+    // Setup the comment object before each test
     @BeforeEach
     public void setUp() {
         comment = new Comment();
@@ -38,28 +40,36 @@ public class CommentControllerTest {
         comment.setLongitude(0.0);
     }
 
+    // Test the getComments method
     @Test
     public void testGetComments() {
-        Long postId = 1L;
-        when(commentService.getComments(postId)).thenReturn(List.of(comment));
+        Long postId = 1L; 
+        
+        // Setup the mock to return a list with one element
+        when(commentService.getComments(postId)).thenReturn(List.of(comment)); 
     
+        // Call the getComments method
         ResponseEntity<List<Comment>> response = commentController.getComments(postId);
     
-        assertNotNull(response.getBody());
+        // Check the response
+        assertNotNull(response.getBody()); // Ensure the list is not null
         assertEquals(1, response.getBody().size()); // Ensure the list has one element
         assertEquals(comment, response.getBody().get(0)); // Check the first element in the list
-        assertEquals(HttpStatus.OK, response.getStatusCode()); 
-        verify(commentService).getComments(postId);
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(commentService).getComments(postId);// Ensure the service method was called
     }
 
+    // Test the addComment method
     @Test
     public void testAddComment() {
         when(commentService.save(comment)).thenReturn(comment);
     
+        // Call the addComment method
         ResponseEntity<Comment> response = commentController.addComment(comment);
     
-        assertEquals(comment, response.getBody());
-        assertEquals(HttpStatus.OK, response.getStatusCode()); 
-        verify(commentService).save(comment);
+        // Check the response
+        assertEquals(comment, response.getBody()); // Ensure the comment is returned
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(commentService).save(comment);// Ensure the service method was called
     }
 }

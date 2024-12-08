@@ -24,21 +24,25 @@ public class UserController {
     @Autowired
     private UserService userService;
     
+    // register users
     @PostMapping("/register")
-    public User registerUser(@RequestBody User user) {
+    public User registerUser(@RequestBody User user) { 
         return userService.registerUser(user);
     }
 
+    // login endpoint
     @PostMapping("/login")
     public User login(@RequestBody User user) {
         return userService.login(user.getUsername(), user.getPassword());
     }
     
+    // get user by id
     @GetMapping("/getUser")
     public ResponseEntity<User> getUser(@RequestParam("userId") Long userId) {
         return ResponseEntity.ok(userService.getUser(userId));
     }
     
+    // get all users
     @GetMapping("/getUsers")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getUsers());

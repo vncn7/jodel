@@ -28,6 +28,7 @@ public class VotingControllerTest {
 
     private Voting voting;
 
+    // Setup the voting object before each test
     @BeforeEach
     public void setUp() {
 
@@ -37,64 +38,80 @@ public class VotingControllerTest {
         voting.setValue(1);
     }
 
+    // Test the getVotings method
     @Test
     public void testGetVotings(){
         Long commentId = 1L;
+        // Setup the mock to return a list with one element
         when(votingService.getVotings(commentId)).thenReturn(List.of(voting));
-
+        // Call the getVotings method  
         ResponseEntity<List<Voting>> response = votingController.getVotings(commentId);
 
-        assertNotNull(response.getBody());
-        assertEquals(1, response.getBody().size());
-        assertEquals(voting, response.getBody().get(0));
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        verify(votingService).getVotings(commentId);
+        // Check the response
+        assertEquals(1, response.getBody().size()); // Ensure the list has one element
+        assertEquals(voting, response.getBody().get(0)); // Check the first element in the list
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(votingService).getVotings(commentId); // Ensure the service method was called
     }
 
+    // Test the getLikes method
     @Test
     public void testGetLikes(){
         Long commentId = 1L;
+        // Setup the mock to return a list with one element
         when(votingService.getLikes(commentId)).thenReturn(List.of(voting));
 
+        // Call the getLikes method
         ResponseEntity<List<Voting>> response = votingController.getLikes(commentId);
 
-        assertNotNull(response.getBody());
-        assertEquals(1, response.getBody().size());
-        assertEquals(voting, response.getBody().get(0));
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        verify(votingService).getLikes(commentId);
+        // Check the response
+        assertEquals(1, response.getBody().size()); // Ensure the list has one element
+        assertEquals(voting, response.getBody().get(0)); // Check the first element in the list
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(votingService).getLikes(commentId); // Ensure the service method was called
     }
 
+    // Test the getDislikes method
     @Test public void testGetDislikes(){
         Long commentId = 1L;
+        // Setup the mock to return a list with one element
         when(votingService.getDislikes(commentId)).thenReturn(List.of(voting));
 
+        // Call the getDislikes method
         ResponseEntity<List<Voting>> response = votingController.getDislikes(commentId);
 
-        assertNotNull(response.getBody());
-        assertEquals(1, response.getBody().size());
-        assertEquals(voting, response.getBody().get(0));
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        verify(votingService).getDislikes(commentId);
+        // Check the response
+        assertEquals(1, response.getBody().size()); // Ensure the list has one element
+        assertEquals(voting, response.getBody().get(0)); // Check the first element in the list
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(votingService).getDislikes(commentId); // Ensure the service method was called
     }
 
+    // Test the upvote method
     @Test public void testUpvote(){
+        // Setup the mock to return the voting
         when(votingService.upvote(voting)).thenReturn(voting);
 
+        // Call the upvote method
         ResponseEntity<Voting> response = votingController.upvote(voting);
 
-        assertEquals(voting, response.getBody());
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        verify(votingService).upvote(voting);
+        // Check the response
+        assertEquals(voting, response.getBody()); // Ensure the voting is returned
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(votingService).upvote(voting); // Ensure the service method was called
     }
 
+    // Test the downvote method
     @Test public void testDownvote(){
+        // Setup the mock to return the voting
         when(votingService.downvote(voting)).thenReturn(voting);
 
+        // Call the downvote method
         ResponseEntity<Voting> response = votingController.downvote(voting);
 
-        assertEquals(voting, response.getBody());
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        verify(votingService).downvote(voting);
+        // Check the response
+        assertEquals(voting, response.getBody()); // Ensure the voting is returned
+        assertEquals(HttpStatus.OK, response.getStatusCode()); // Ensure the status code is OK
+        verify(votingService).downvote(voting); // Ensure the service method was called
     }
 }

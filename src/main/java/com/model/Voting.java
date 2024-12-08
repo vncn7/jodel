@@ -25,6 +25,8 @@ public class Voting {
     @Column(name = "value")
     private int value;
 
+
+    // Constructors
     public Voting() {    	
     }
 
@@ -35,6 +37,7 @@ public class Voting {
         this.createdAt = new Date();
     }
 
+    // Getters and Setters
     public void setId(Long id) {
         this.id = id;
     }

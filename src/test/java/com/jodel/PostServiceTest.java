@@ -22,6 +22,7 @@ public class PostServiceTest {
 
     private Post post;
 
+    // Setup the post object before each test
     @BeforeEach
     public void setUp() {
         post = new Post();
@@ -31,6 +32,7 @@ public class PostServiceTest {
         post.setLongitude(0.0);
     }
 
+    // Test the getPosts method
     @Test
     public void testGetPosts() {
         double lat = 0.0;
@@ -41,32 +43,38 @@ public class PostServiceTest {
         
         List<Post> posts = postService.getPosts(lat, lon);
         
-        assertEquals(1, posts.size());
-        assertEquals(post, posts.get(0));
-        
-        // Verify the correct method was called with correct parameters
-        verify(postRepository).findPostsWithin10km(lon, lat);
+        // Assertions
+        assertEquals(1, posts.size()); // Ensure the list has one element
+        assertEquals(post, posts.get(0)); // Check the first element in the list
+        verify(postRepository).findPostsWithin10km(lon, lat); // Ensure the repository method was called
     }
 
+    // Test the getAllPosts method
     @Test
     public void testGetAllPosts() {
+        // Update the mock method to match the new repository method
         when(postRepository.findAll()).thenReturn(List.of(post));
         
+        // Call the method
         List<Post> posts = postService.getAllPosts();
         
-        assertEquals(1, posts.size());
-        assertEquals(post, posts.get(0));
-        
-        verify(postRepository).findAll();
+        // Assertions
+        assertEquals(1, posts.size()); // Ensure the list has one element
+        assertEquals(post, posts.get(0)); // Check the first element in the list
+        verify(postRepository).findAll(); // Ensure the repository method was called
     }
 
+    // Test the save method
     @Test
     public void testSave() {
+        // Update the mock method to match the new repository method
         when(postRepository.save(post)).thenReturn(post);
         
+        // Call the method
         Post savedPost = postService.save(post);
         
-        assertEquals(post, savedPost);
-        verify(postRepository).save(post);
+        // Assertions
+        assertEquals(post, savedPost); // Ensure the post is returned
+        verify(postRepository).save(post); // Ensure the repository method was called
     }
 }

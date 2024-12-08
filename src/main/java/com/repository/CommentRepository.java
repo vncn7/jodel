@@ -7,6 +7,5 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long> {
-    // New method to find comments by post ID
-    List<Comment> findByPostId(long postId);
+    List<Comment> findByPostId(long postId); // New method to find comments by post ID
 }

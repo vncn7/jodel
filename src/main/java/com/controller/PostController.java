@@ -26,7 +26,7 @@ public class PostController {
         return ResponseEntity.ok(postService.getAllPosts());
     }
     
-    // Returns all posts for a given location
+    // Returns all posts for a given location (latitude and longitude + 10km (in PostRepository))
     @GetMapping("/getPosts")
     public ResponseEntity<List<Post>> getPosts(
 
@@ -38,8 +38,7 @@ public class PostController {
     // Add post
     @PostMapping("/addPost")
     public ResponseEntity<Post> addPost(@RequestBody Post post) {
-    	// Set the createdAt attribute to the current date
-    	post.setCreatedAt();
+    	post.setCreatedAt(); // Set the createdAt attribute to the current date
         return ResponseEntity.ok(postService.save(post));
     }
 }

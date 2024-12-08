@@ -21,11 +21,11 @@ public class User implements Serializable {
     @Column(name = "password", length = 64)
     private String password;
 
-    // Default no-args constructor for JPA
+    
+    // Constructors
     public User() {
     }
 
-    // Constructor with parameters (id, username, password)
     public User(Long id, String username, String password) {
         this.id = id;
         this.username = username;
