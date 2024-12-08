@@ -40,18 +40,14 @@ public class UserServiceTest {
 
     @Test
     public void testRegisterUser() {
-        // Mock the behavior of the password encoder and user repository
         when(passwordEncoder.encode(user.getPassword())).thenReturn("hashedPassword");
         when(userRepository.save(user)).thenReturn(user);
 
-        // Call the registerUser method
         User savedUser = userService.registerUser(user);
 
-        // Verify that the password was hashed and the user was saved
         assertEquals(user, savedUser);
         assertEquals("hashedPassword", savedUser.getPassword());
 
-        // Verify interactions
         verify(passwordEncoder).encode("test");
         verify(userRepository).save(user);
     }
@@ -65,7 +61,6 @@ public class UserServiceTest {
 
         assertEquals(user, loggedInUser);
 
-        // Verify interactions
         verify(userRepository).findByUsername(user.getUsername());
         verify(passwordEncoder).matches(user.getPassword(), user.getPassword());
     }
@@ -86,7 +81,6 @@ public class UserServiceTest {
 
         assertEquals(user, foundUser);
 
-        // Verify repository's findById method is called
         verify(userRepository).findById(userId);
     }
 }
