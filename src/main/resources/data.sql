@@ -36,3 +36,17 @@ INSERT INTO "tcomment" (id, latitude, longitude, created_At, text, author_Id, po
 INSERT INTO "tcomment" (id, latitude, longitude, created_At, text, author_Id, post_Id)
     VALUES (4, 2545, 87, '2024-01-08', 'Kommentar Nummer Vier!', 2, 2)
     ON CONFLICT (id) DO NOTHING;
+
+-- Insert data into the tvoting table
+INSERT INTO "tvoting" (id, author_id, comment_id, created_at, value)
+    VALUES (1, 1, 1, '2024-01-08', 1)
+    ON CONFLICT (id) DO NOTHING;
+INSERT INTO "tvoting" (id, author_id, comment_id, created_at, value)
+    VALUES (2, 2, 1, '2024-01-08', -1)
+    ON CONFLICT (id) DO NOTHING;
+INSERT INTO "tvoting" (id, author_id, comment_id, created_at, value)
+    VALUES (3, 2, 2, '2024-01-08', 1)
+    ON CONFLICT (id) DO NOTHING;
+INSERT INTO "tvoting" (id, author_id, comment_id, created_at, value)
+    VALUES (4, 1, 3, '2024-01-08', 1)
+    ON CONFLICT (id) DO NOTHING;
