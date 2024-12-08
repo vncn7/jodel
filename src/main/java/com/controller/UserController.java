@@ -15,7 +15,7 @@ import java.util.List;
 
 
 
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 
 @RestController
 @RequestMapping("/users")
@@ -24,10 +24,15 @@ public class UserController {
     @Autowired
     private UserService userService;
     
+    @PostMapping("/register")
+    public User registerUser(@RequestBody User user) {
+        return userService.registerUser(user);
+    }
+
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user) {
-        User loggedInUser = userService.login(user.getUsername(), user.getPassword());
-        return ResponseEntity.ok(loggedInUser);}
+    public User login(@RequestBody User user) {
+        return userService.login(user.getUsername(), user.getPassword());
+    }
     
     @GetMapping("/getUser")
     public ResponseEntity<User> getUser(@RequestParam("userId") Long userId) {
